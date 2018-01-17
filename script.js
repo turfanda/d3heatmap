@@ -16,10 +16,12 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
 
   var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   
-var xScale = d3.scaleLinear().domain(mdata[0].year,mdata[mdata.length-1].year).range([0, width]);
-var yScale = d3.scaleTime().domain(new Date(2012, 0, 1), new Date(2012, 11, 31)).range([height, 0]);
+var xScale = d3.scaleLinear().domain([mdata[0].year,mdata[mdata.length-1].year]).range([0, width]);
+var yScale = d3.scaleTime().domain([new Date(2012, 0, 1), new Date(2012, 11, 31)]).range([height, 0]);
 
-g.append("g").call(d3.axisLeft(yScale).ticks(d3.timeMonth).tickSize(16,0));
+g.append("g").call(d3.axisLeft(yScale).data(mdata).tickFormat(function(d) {
+            return d.month;
+        }));
   
   
 
