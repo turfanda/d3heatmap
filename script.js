@@ -5,14 +5,22 @@ var width = svg.attr("width") - margin;
 var height = svg.attr("height") - margin;
 
 
-var xScale = d3.scaleLinear().range([0, width]);
-var yScale = d3.scaleLinear().range([height, 0]);
+
 
 var g = svg.append("g").attr("transform", "translate(" + 50 + "," + 50 + ")");
 
 d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/global-temperature.json",function(err,data){
  if (err) throw err;
-  xScale
+  
+  var mdata=data.monthlyVariance;
+  
+//var xScale = d3.scaleLinear().domain().range([0, width]);
+var yScale = d3.time.scale().domain(new Date(2012, 0, 1), new Date(2012, 11, 31)).range([height, 0]);
+  
+  
+g.append("g").call(d3.axisLeft(yScale).tickFormat(function(mdata) {
+            return mdata.month;
+        }).ticks(d3.time.months).tickSize(16,0));
 
 });
   //g.append("rect").attr("x",0).attr("y",0).attr("width",100).attr("height",100).style("fill","black");
