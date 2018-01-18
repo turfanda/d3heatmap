@@ -42,22 +42,12 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
     return obj.variance;
     });
   
-    var map = svg.selectAll(".map")
-    .data(colors)
-    .enter()
-    .append("g").attr("class","mapg").append("rect")
-    .attr("x",function(d,i){return (width+80)/2+i*30})
-    .attr("y",height+50).attr("width",30).attr("height",20).style("fill",function(d){return d;})
+
     
-    d3.selectAll(".mapg")
-      .append("text")
-      .attr("x",function(d,i){return (width+90)/2+i*30})
-      .attr("y",height+90)
-      .style("fill","black")
-      .text("asd");
+
   
   
-column("d3.scaleQuantile", quantile);
+
   
     var lowVariance = d3.min(varianceData);
     var highVariance = d3.max(varianceData);
@@ -65,8 +55,22 @@ column("d3.scaleQuantile", quantile);
     var colorScale = d3.scaleQuantile()
     .domain([lowVariance + baseTemp, highVariance + baseTemp])
     .range(colors);
+  
+      var map = svg.selectAll(".map")
+    .data(colors)
+    .enter()
+    .append("g").attr("class","mapg").append("rect")
+    .attr("x",function(d,i){return (width+80)/2+i*30})
+    .attr("y",height+50).attr("width",30).attr("height",20).style("fill",function(d){return d;})
 
-  console.log(colorScale("#5e4fa2"));
+    d3.selectAll(".mapg")
+      .append("text")
+      .attr("x",function(d,i){return (width+90)/2+i*30})
+      .attr("y",height+90)
+      .style("fill","black")
+      .text("asd");
+  
+  console.log(colorScale.invertExtent("#3288bd"));
   
     var div = d3.select("body").append("div").attr("class", "infoBox");
 
