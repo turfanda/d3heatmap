@@ -37,7 +37,7 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
 
     var div = d3.select("body").append("div").attr("class", "infoBox");
 
-    g.selectAll(".rect")
+    var temp = g.selectAll(".rect")
         .data(mdata)
         .enter()
         .append("rect")
@@ -51,14 +51,14 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
         .attr("height", gridHeight)
         .attr("rx", 0)
         .attr("ry", 0)
-        .style("fill", function(d) {
-            return colorScale(d.variance+baseTemp);
-        })
+    .style("fill", function(d) {
+      return colorScale(d.variance + baseTemp);
+    })
         .on("mouseover", function(d) {
             div.transition()
                 .duration(100)
                 .style("opacity", 0.9);
-            div.html("<span class='insideInfo'>" + d.year + "</span><br><span class='insideInfo'>" + monthNames[d.month - 1] + "</span>")
+            div.html("<span class='insideInfo'>" + d.year + "</span><br><span class='insideInfo'>" + monthNames[d.month - 1] + "</span><br><span class='insideInfo'>"++"</span><br><span class='insideInfo'>")
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY) + "px");
         })
@@ -68,7 +68,5 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
                 .style("opacity", 0);
         });
 
-
-
-
+ (Math.floor((d.variance + baseTemp) * 1000) / 1000)
 });
