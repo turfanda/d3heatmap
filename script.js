@@ -10,11 +10,11 @@ var monthNames = ["January", "February", "March", "April", "May", "June", "July"
 var g = svg.append("g").attr("transform", "translate(" + 50 + "," + 50 + ")");
 
 d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/global-temperature.json", function(err, data) {
-    if (err) throw err;
+    if (err) {throw err;}
 
     var baseTemp = data.baseTemperature;
     var mdata = data.monthlyVariance;
-    var firstyear = parseInt(mdata[0].year)
+    var firstyear = parseInt(mdata[0].year);
     var gridHeight = height / 12;
     var gridWidth = width / (mdata.length / 12);
 
@@ -42,10 +42,10 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
         .enter()
         .append("rect")
         .attr("x", function(d, i) {
-            return (parseInt(d.year) - firstyear) * gridWidth
+            return (parseInt(d.year) - firstyear) * gridWidth;
         })
         .attr("y", function(d) {
-            return (parseInt(d.month) - 1) * gridHeight
+            return (parseInt(d.month) - 1) * gridHeight;
         })
         .attr("width", gridWidth)
         .attr("height", gridHeight)
