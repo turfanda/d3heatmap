@@ -23,7 +23,14 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
     var xScale = d3.scaleTime().domain([new Date(mdata[0].year, 0, 1), new Date(mdata[mdata.length - 1].year, 0, 1)]).range([0, width]);
     var yScale = d3.scaleTime().domain([new Date(2012, 0, 1), new Date(2012, 11, 31)]).range([0, height]);
 
-    g.append("g").call(d3.axisLeft(yScale).tickFormat(d3.timeFormat("%b")));
+    g.append("g").call(d3.axisLeft(yScale).tickFormat(d3.timeFormat("%b"))).append("text")
+        .attr("x", 100)
+        .attr("y", -35)
+        .style("text-anchor", "End")
+        .style("fill", "Black")
+        .style("font-size", "16px")
+        .attr("transform", "rotate(-90)")
+        .text("Months");
     g.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(xScale).tickFormat(d3.timeFormat("%Y")).ticks(20));
   
     var varianceData = mdata.map(function(obj) {
@@ -69,11 +76,5 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
                 .duration(200)
                 .style("opacity", 0);
         });
-  
-  svg.append("text")
-       .attr("transform", "translate(100,0)")
-       .attr("x", 100)
-       .attr("y", 50)
-        .attr("class", "title")
-       .text("GROSS DOMESTIC PRODUCT");
+
 });
