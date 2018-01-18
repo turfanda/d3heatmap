@@ -1,6 +1,6 @@
 var d3;
 var svg = d3.select("svg");
-var margin = 30;
+var margin = 100;
 var width = svg.attr("width") - margin;
 var height = svg.attr("height") - margin;
 
@@ -24,14 +24,21 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
     var yScale = d3.scaleTime().domain([new Date(2012, 0, 1), new Date(2012, 11, 31)]).range([0, height]);
 
     g.append("g").call(d3.axisLeft(yScale).tickFormat(d3.timeFormat("%b"))).append("text")
-        .attr("x", 100)
+        .attr("x", -200)
         .attr("y", -35)
         .style("text-anchor", "End")
         .style("fill", "Black")
         .style("font-size", "16px")
         .attr("transform", "rotate(-90)")
         .text("Months");
-    g.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(xScale).tickFormat(d3.timeFormat("%Y")).ticks(20));
+  
+    g.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(xScale).tickFormat(d3.timeFormat("%Y")).ticks(20)).append("text")
+        .attr("x", 400)
+        .attr("y", 40)
+        .style("text-anchor", "End")
+        .style("fill", "Black")
+        .style("font-size", "16px")
+        .text("Years");
   
     var varianceData = mdata.map(function(obj) {
     return obj.variance;
@@ -47,23 +54,23 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
     var div = d3.select("body").append("div").attr("class", "infoBox");
 
     var temp = g.selectAll(".rect")
-        .data(mdata)
-        .enter()
-        .append("rect")
-        .attr("x", function(d, i) {
+    .data(mdata)
+    .enter()
+    .append("rect")
+    .attr("x", function(d, i) {
             return (parseInt(d.year) - firstyear) * gridWidth;
         })
-        .attr("y", function(d) {
+    .attr("y", function(d) {
             return (parseInt(d.month) - 1) * gridHeight;
         })
-        .attr("width", gridWidth)
-        .attr("height", gridHeight)
-        .attr("rx", 0)
-        .attr("ry", 0)
+    .attr("width", gridWidth)
+    .attr("height", gridHeight)
+    .attr("rx", 0)
+    .attr("ry", 0)
     .style("fill", function(d) {
       return colorScale(d.variance + baseTemp);
     })
-        .on("mouseover", function(d) {
+    .on("mouseover", function(d) {
             div.transition()
                 .duration(100)
                 .style("opacity", 0.9);
@@ -71,10 +78,12 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY) + "px");
         })
-        .on("mouseout", function() {
+    .on("mouseout", function() {
             div.transition()
                 .duration(200)
                 .style("opacity", 0);
         });
+  
+  g.selectAll(".legend").data
 
 });
