@@ -42,12 +42,6 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
     return obj.variance;
     });
   
-
-    
-
-  
-  
-
   
     var lowVariance = d3.min(varianceData);
     var highVariance = d3.max(varianceData);
@@ -64,13 +58,14 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
     .attr("y",height+50).attr("width",30).attr("height",20).style("fill",function(d){return d;})
 
     d3.selectAll(".mapg")
+      .data(colors)
       .append("text")
       .attr("x",function(d,i){return (width+90)/2+i*30})
       .attr("y",height+90)
       .style("fill","black")
-      .text("asd");
-  
-  console.log(colorScale.invertExtent("#3288bd"));
+      .text(function(d){
+      var num =colorScale.invertExtent(d);
+      return parseFloat( num[0].toFixed(1) )});
   
     var div = d3.select("body").append("div").attr("class", "infoBox");
 
