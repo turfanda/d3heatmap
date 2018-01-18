@@ -58,7 +58,7 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
             div.transition()
                 .duration(100)
                 .style("opacity", 0.9);
-            div.html("<span class='insideInfo'>" + d.year + "</span><br><span class='insideInfo'>" + monthNames[d.month - 1] + "</span><br><span class='insideInfo'>"++"</span><br><span class='insideInfo'>")
+            div.html("<span class='insideInfo'>" + d.year+"-"+ monthNames[d.month - 1] +"</span><br><span class='insideInfo'>"+ (Math.floor((d.variance + baseTemp) * 1000) / 1000)+"&#8451</span><br><span class='insideInfo'>"+d.variance+"&#8451</span>")
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY) + "px");
         })
@@ -67,6 +67,4 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
                 .duration(200)
                 .style("opacity", 0);
         });
-
- (Math.floor((d.variance + baseTemp) * 1000) / 1000)
 });
