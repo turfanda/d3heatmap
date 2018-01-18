@@ -11,10 +11,11 @@ var g = svg.append("g").attr("transform", "translate(" + 50 + "," + 50 + ")");
 d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/global-temperature.json", function(err, data) {
   if (err) throw err;
 
+  
   var mdata = data.monthlyVariance;
+  var firstyear=parseInt(mdata[0].year)
   var gridHeight=height/12;
-  var gridWidth=width/mdata.length;
-
+  var gridWidth=width/(mdata.length/12);
 
   var xScale = d3.scaleTime().domain([new Date(mdata[0].year, 0, 1), new Date(mdata[mdata.length - 1].year, 0, 1)]).range([0, width]);
   var yScale = d3.scaleTime().domain([new Date(2012, 0, 1), new Date(2012, 11, 31)]).range([height, 0]);
@@ -26,11 +27,13 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
     .data(mdata)
     .enter()
     .append("rect")
-    .attr("x",function(d,i){return i*gridWidth})
+    .attr("x",function(d,i){return ()*gridWidth})
     .attr("y",function(d){return (parseInt(d.month)-1)*gridHeight})
     .attr("width",gridWidth)
     .attr("height",gridHeight)
-    .style("fill",function(d){if(d.variance>0) return "black"; else return "red";});
+    .attr("rx", 0)
+    .attr("ry", 0)
+    .style("fill",function(d){if(d.variance>0) return "red"; else return "black";});
   
 
 
