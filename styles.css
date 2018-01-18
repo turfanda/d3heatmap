@@ -1,3 +1,12 @@
+body{
+text-align:center;
+}
+
+.chartZone{
+background-color:blue;
+  width:1000px;
+  margin:auto;
+}
 .infoBox{
   position: absolute;
   text-align: center;

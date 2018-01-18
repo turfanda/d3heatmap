@@ -1,6 +1,6 @@
 var d3;
 var svg = d3.select("svg");
-var margin = 100;
+var margin = 30;
 var width = svg.attr("width") - margin;
 var height = svg.attr("height") - margin;
 
@@ -9,7 +9,7 @@ console.log(1);
 var colors = ["#5e4fa2", "#3288bd", "#66c2a5", "#abdda4", "#e6f598", "#ffffbf", "#fee08b", "#fdae61", "#f46d43", "#d53e4f", "#9e0142"];
 var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-var g = svg.append("g").attr("transform", "translate(" + 50 + "," + 50 + ")");
+var g = svg.append("g").attr("transform", "translate(" + 50 + "," + 5 + ")");
 
 d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/global-temperature.json", function(err, data) {
     if (err) {throw err;}
@@ -69,4 +69,11 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
                 .duration(200)
                 .style("opacity", 0);
         });
+  
+  svg.append("text")
+       .attr("transform", "translate(100,0)")
+       .attr("x", 100)
+       .attr("y", 50)
+        .attr("class", "title")
+       .text("GROSS DOMESTIC PRODUCT");
 });
