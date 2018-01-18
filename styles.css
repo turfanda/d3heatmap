@@ -1,2 +1,6 @@
-svg{
+.infoBox{
+  opacity:0;
+  position:absolute;
+  background:yellow;
+  border-radius:10px;
 }
