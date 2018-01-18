@@ -4,3 +4,8 @@
   background:yellow;
   border-radius:10px;
 }
+
+rect {
+  stroke-width: 0px;
+  cursor: pointer;
+}

@@ -9,12 +9,10 @@ var monthNames = ["January", "February", "March", "April", "May", "June", "July"
 
 var g = svg.append("g").attr("transform", "translate(" + 50 + "," + 50 + ")");
 
-
-
 d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/global-temperature.json", function(err, data) {
     if (err) throw err;
 
-
+    var baseTemp = data.baseTemperature;
     var mdata = data.monthlyVariance;
     var firstyear = parseInt(mdata[0].year)
     var gridHeight = height / 12;
@@ -26,9 +24,14 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
     g.append("g").call(d3.axisLeft(yScale).tickFormat(d3.timeFormat("%b")));
     g.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(xScale).tickFormat(d3.timeFormat("%Y")).ticks(20));
   
+    var varianceData = mdata.map(function(obj) {
+    return obj.variance;
+    });
   
+    var lowVariance = d3.min(varianceData);
+    var highVariance = d3.max(varianceData);
   
-    var colorScale = d3.scale.quantile()
+    var colorScale = d3.scaleQuantile()
     .domain([lowVariance + baseTemp, highVariance + baseTemp])
     .range(colors);
 
@@ -49,8 +52,7 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
         .attr("rx", 0)
         .attr("ry", 0)
         .style("fill", function(d) {
-            if (d.variance > 0) return "red";
-            else return "black";
+            return colorScale(d.variance+baseTemp);
         })
         .on("mouseover", function(d) {
             div.transition()
