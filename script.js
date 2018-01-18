@@ -4,8 +4,6 @@ var margin = 100;
 var width = svg.attr("width") - margin;
 var height = svg.attr("height") - margin;
 
-console.log(1);
-
 var colors = ["#5e4fa2", "#3288bd", "#66c2a5", "#abdda4", "#e6f598", "#ffffbf", "#fee08b", "#fdae61", "#f46d43", "#d53e4f", "#9e0142"];
 var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -53,10 +51,13 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
     
     d3.selectAll(".mapg")
       .append("text")
-      .attr("x",function(d,i){return (width+80)/2+i*30})
-      .attr("y",height+80)
-      .style("fill","black").text("asd")
-
+      .attr("x",function(d,i){return (width+90)/2+i*30})
+      .attr("y",height+90)
+      .style("fill","black")
+      .text("asd");
+  
+  
+column("d3.scaleQuantile", quantile);
   
     var lowVariance = d3.min(varianceData);
     var highVariance = d3.max(varianceData);
@@ -65,6 +66,8 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
     .domain([lowVariance + baseTemp, highVariance + baseTemp])
     .range(colors);
 
+  console.log(colorScale("#5e4fa2"));
+  
     var div = d3.select("body").append("div").attr("class", "infoBox");
 
     var heatmap = g.selectAll(".rect")
