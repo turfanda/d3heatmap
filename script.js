@@ -44,6 +44,20 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
     return obj.variance;
     });
   
+    var map = svg.selectAll(".map")
+    .data(colors)
+    .enter()
+    .append("g").attr("class","mapg").append("rect")
+    .attr("x",function(d,i){return (width+80)/2+i*30})
+    .attr("y",height+50).attr("width",30).attr("height",20).style("fill",function(d){return d;})
+    
+    d3.selectAll(".mapg")
+      .append("text")
+      .attr("x",function(d,i){return (width+80)/2+i*30})
+      .attr("y",height+80)
+      .style("fill","black").text("asd")
+
+  
     var lowVariance = d3.min(varianceData);
     var highVariance = d3.max(varianceData);
   
@@ -53,7 +67,7 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
 
     var div = d3.select("body").append("div").attr("class", "infoBox");
 
-    var temp = g.selectAll(".rect")
+    var heatmap = g.selectAll(".rect")
     .data(mdata)
     .enter()
     .append("rect")
@@ -84,16 +98,5 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
                 .style("opacity", 0);
         });
   
-  g.selectAll(".legend")
-    .data(colors)
-    .enter()
-    .append("rect")
-    .attr("x",function(d,i){return (width+80)/2+i*30})
-    .attr("y",height+50).attr("width",30).attr("height",20).style("fill",function(d){return d;})
-    .append("text")
-    .attr("x",10)
-    .attr("y",10)
-    .style("fill", "Black")
-    .text("asd");
 
 });
