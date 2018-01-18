@@ -84,6 +84,16 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
                 .style("opacity", 0);
         });
   
-  g.selectAll(".legend").data
+  g.selectAll(".legend")
+    .data(colors)
+    .enter()
+    .append("rect")
+    .attr("x",function(d,i){return (width+80)/2+i*30})
+    .attr("y",height+50).attr("width",30).attr("height",20).style("fill",function(d){return d;})
+    .append("text")
+    .attr("x",10)
+    .attr("y",10)
+    .style("fill", "Black")
+    .text("asd");
 
 });
