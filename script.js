@@ -4,6 +4,8 @@ var margin = 100;
 var width = svg.attr("width") - margin;
 var height = svg.attr("height") - margin;
 
+var colors = ["#5e4fa2", "#3288bd", "#66c2a5", "#abdda4", "#e6f598", "#ffffbf", "#fee08b", "#fdae61", "#f46d43", "#d53e4f", "#9e0142"];
+
 var g = svg.append("g").attr("transform", "translate(" + 50 + "," + 50 + ")");
 
 d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/global-temperature.json", function(err, data) {
@@ -24,11 +26,11 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
     .data(mdata)
     .enter()
     .append("rect")
-    .attr("x",function(d,i){})
-    .attr("y",)
+    .attr("x",function(d,i){return i*gridWidth})
+    .attr("y",function(d){return (parseInt(d.month)-1)*gridHeight})
     .attr("width",gridWidth)
     .attr("height",gridHeight)
-    .style("fill",function(d){});
+    .style("fill",function(d){if(d.variance>0) return "black"; else return "red";});
   
 
 
